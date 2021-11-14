@@ -13,9 +13,9 @@
             <tr class="table_header">
                 <th class="table_padding">Add User</th>
                 <th class="table_padding">Manage Users</th>
-                <c:if test="${editUser != null}">
-                <th class="table_padding">Edit User</th>
-                </c:if>
+                    <c:if test="${editUser != null}">
+                    <th class="table_padding">Edit User</th>
+                    </c:if>
             </tr>
             <td>
                 <form action="user" method="post">
@@ -49,19 +49,19 @@
                             <td>${user.email}</td>
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
-                            
+                                
                             <c:forEach items="${roles}" var="role">
-                                <c:if test = "${user.role eq role.roleId}">
+                                <c:if test = "${user.role.equals(role.roleId)}">
                                     <td>${role.roleName}</td>
                                 </c:if>
                             </c:forEach>
-                                    
+
                             <c:if test="${user.active eq true}">
                                 <td>
                                     <input type="checkbox" disabled checked>
                                 </td>
                             </c:if>
-                            <c:if test="${user.active != 1}">
+                            <c:if test="${user.active != false}">
                                 <td>
                                     <input type="checkbox" disabled>
                                 </td>
@@ -83,13 +83,13 @@
                         <select name="editRole">
                             <c:forEach items="${roles}" var="role">
                                 <c:if test = "${role.roleId eq editUser.role}">
-                                     <option selected value ="${role.roleId}">${role.roleName}</option>
+                                    <option selected value ="${role.roleId}">${role.roleName}</option>
                                 </c:if>
-                                     
+
                                 <c:if test = "${role.roleId ne editUser.role}">
                                     <option value ="${role.roleId}">${role.roleName}</option>
                                 </c:if>
-                                    
+
                             </c:forEach>
                         </select>
                         <br>
@@ -97,7 +97,7 @@
                         <input class="save" type="submit" value="Save">
                         <br>
                         <a href="user"><input class="cancel" type="button" value="Cancel" href="user"></a>
-                    </c:if>
+                        </c:if>
                 </form>
             </td>
         </table>

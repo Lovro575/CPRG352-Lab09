@@ -1,4 +1,3 @@
-
 package dataaccess;
 
 import java.util.List;
@@ -7,13 +6,13 @@ import javax.persistence.EntityTransaction;
 import models.Role;
 import models.User;
 
-
 public class UserDB {
+
     public List<User> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
-            List<User> users = em.createNamedQuery("User.finaAll", User.class).getResultList();
+            List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
             return users;
         } finally {
             em.close();
@@ -22,7 +21,7 @@ public class UserDB {
 
     public User get(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             User user = em.find(User.class, email);
             return user;
@@ -34,7 +33,7 @@ public class UserDB {
     public void insert(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             Role role = user.getRole();
             role.getUserList().add(user);
@@ -51,7 +50,7 @@ public class UserDB {
     public void update(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.merge(user);
@@ -66,7 +65,7 @@ public class UserDB {
     public void delete(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             Role role = user.getRole();
             role.getUserList().remove(user);
@@ -80,5 +79,5 @@ public class UserDB {
             em.close();
         }
     }
-    
+
 }
