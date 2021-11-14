@@ -56,7 +56,7 @@
                                 </c:if>
                             </c:forEach>
 
-                            <c:if test="${user.active eq true}">
+                            <c:if test="${user.active == true}">
                                 <td>
                                     <input type="checkbox" disabled checked>
                                 </td>
